@@ -1,16 +1,15 @@
-﻿//в VSPE создать пару "COM1-COM2"
-//в папке данного проекта должен лежать файл "serial_port_com_2.exe" (из папки Debug одноименного проекта)
-//для выхода надо отправить сообщение "quit"
-//необходимо запустить только тот код, который приведен ниже
-#include "pch.h"
+﻿#include "pch.h"
 #define _SCL_SECURE_NO_WARNINGS
+#define _CRT_SECURE_NO_WARNINGS
 #include <windows.h>
 #include <iostream>
 #include <string>
 #include <math.h>
 using namespace std;
-int main() {
+int main(int argc, char* argv[]) {
 	string buffer;
+	wchar_t* path = new wchar_t[50];
+	mbstowcs(path, argv[1], 50);
 	HANDLE event_handle, com_1_handle;
 	DCB com_1_dcb;
 	COMMTIMEOUTS com_1_commtimeouts;
@@ -32,7 +31,7 @@ int main() {
 		cout << "Error code: " << (int)error_code << endl;
 		return error_code;
 	}
-	if (!CreateProcess((LPCWSTR)L".\\serial_port_com_2.exe", NULL, NULL, NULL, FALSE, CREATE_NEW_CONSOLE, NULL, NULL, &si, &pi)) {
+	if (!CreateProcess(path, NULL, NULL, NULL, FALSE, CREATE_NEW_CONSOLE, NULL, NULL, &si, &pi)) {
 		error_code = GetLastError();
 		cout << "Error code: " << (int)error_code << endl;
 		return error_code;
