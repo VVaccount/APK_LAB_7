@@ -1,4 +1,7 @@
-﻿#include "pch.h"
+﻿//в папке данного проекта должен лежать файл serial_port_com_2.exe
+//для выхода надо отправить сообщение "quit"
+//необходимо запустить только тот код, который приведен ниже
+#include "pch.h"
 #define _SCL_SECURE_NO_WARNINGS
 #include <windows.h>
 #include <iostream>
